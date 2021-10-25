@@ -4,7 +4,8 @@ const initialState = {
   value: 0,
   status: 'idle',
   movie: {},
-  users: []
+  users: [],
+  data: []
 };
 
 // const ENDPOINT = "https://jsonplaceholder.typicode.com/posts";
@@ -44,6 +45,9 @@ export const counterSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
+    addData: (state, action) => {
+      state.data.push(action.payload)
+    }
   },
 
   extraReducers: {
@@ -108,13 +112,14 @@ export const counterSlice = createSlice({
   // }
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount, addData } = counterSlice.actions;
 
 // selectors
 export const selectCount = (state) => state.counter.value;
 export const selectMovie = (state) => state.counter.movie;
 export const selectStatus = (state) => state.counter.status;
 export const selectUsers = (state) => state.counter.users;
+export const selectData = (state) => state.counter.data;
 
 
 export default counterSlice.reducer;

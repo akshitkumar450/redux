@@ -10,6 +10,8 @@ import {
   selectMovie,
   selectStatus,
   selectUsers,
+  addData,
+  selectData
 } from './counterSlice';
 import styles from './Counter.module.css';
 
@@ -21,9 +23,9 @@ export function Counter() {
   // console.log(movies);
   const status = useSelector(selectStatus);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-
-
+  const [incrementAmount, setIncrementAmount] = useState();
+  const [text, setText] = useState('')
+  const data = useSelector(selectData)
   return (
     <div>
       <div className={styles.row}>
@@ -74,11 +76,24 @@ export function Counter() {
         >fecth user
         </button>
 
+        <input value={text} onChange={(e) => setText(e.target.value)} />
+
+        <button
+          onClick={() => dispatch(addData(text))}
+        >add
+        </button>
 
         {
           users?.map((user) => {
             return (
               <p key={user.id}>{user.name}</p>
+            )
+          })
+        }
+        {
+          data?.map((user) => {
+            return (
+              <p>{user}</p>
             )
           })
         }
